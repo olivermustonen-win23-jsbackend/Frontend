@@ -1,0 +1,143 @@
+.account-details {
+    height: 100%;
+
+    .container {
+        height: 100%;
+        display: grid;
+        gap: 50px;
+        grid-template-columns: 1fr 3fr;
+
+        aside {
+            height: 100%;
+            padding-top: 50px;
+            grid-column: 1 / 2;
+            border-right: 2px solid #E2E5F1;
+
+            .profile {
+                text-align: center;
+
+                .profile-image {
+                    display: inline-block;
+                    position: relative;
+
+                    img {
+                        height: 120px;
+                        width: 120px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    a {
+                        position: absolute;
+                        bottom: 5px;
+                        right: 0;
+                    }
+                }
+
+                .profile-info {
+                    margin-top: 15px;
+
+                    h3 {
+                        font-size: 20px;
+                        font-weight: 800;
+                        margin-bottom: 5px;
+                    }
+
+                    p {
+                        color: var(--color-gray-700);
+                    }
+                }
+            }
+
+            nav {
+                margin-top: 50px;
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+
+                .btn-nav {
+                    text-align: left;
+                    padding: 15px 18px;
+
+                    i {
+                        margin: 0;
+                    }
+
+                   
+                }
+            }
+        }
+
+        .account-information {
+            height: 100%;
+            width: 100%;
+            grid-column: 2 / 3;
+
+            h2 {
+                text-align: center;
+                border-top: 1px solid var(--color-gray-400);
+                padding-top: 30px;
+            }
+
+            #basicInfoGorm {
+                padding-bottom: 50px;
+
+                .form-basicinfo-content {
+                    display: grid;
+                    gap: 20px;
+                    grid-template-columns: 1fr;
+                    grid-template-areas: "firstname" "lastname" "email" "phone" "bio" "buttons";
+
+                    #firstName {
+                        grid-area: firstname;
+                    }
+
+                    #lastName {
+                        grid-area: lastname;
+                    }
+
+                    #email {
+                        grid-area: email;
+                    }
+
+                    #phone {
+                        grid-area: phone;
+                    }
+
+                    #bio {
+                        grid-area: bio;
+                    }
+                }
+            }
+
+            #addressInfoForm {
+                padding-top: 50px;
+                padding-bottom: 50px;
+                width: 100%;
+
+                .form-address-content {
+                    display: grid;
+                    gap: 20px;
+                    grid-template-columns: 1fr;
+                    grid-template-areas: "addressline_1" "addressline_2" "postalcode" "city" "buttons";
+
+                    #addressline_1 {
+                        grid-area: addressline_1
+                    }
+
+                    #addressline_2 {
+                        grid-area: addressline_2
+                    }
+
+                    #postalcode {
+                        grid-area: postalcode
+                    }
+
+                    #city {
+                        grid-area: city
+                    }
+                }
+            }
+        }
+    }
+}

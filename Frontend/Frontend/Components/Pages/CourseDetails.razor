@@ -1,0 +1,51 @@
+﻿@page "/course/details/{Id:int}"
+
+<h3>Course Details</h3>
+
+@if (course == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div>
+        <img src="/images//courses/@course.Image" alt="@course.Title" />
+        <p><strong>Author:</strong> @course.Author</p>
+        <p><strong>Price:</strong> @course.Price</p>
+        <p><strong>Hours:</strong> @course.Hours hours</p>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private CourseModel? course;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadCourseDetailsAsync(Id);
+    }
+
+    private async Task LoadCourseDetailsAsync(int courseId)
+    {
+        var courses = await Http.GetFromJsonAsync<CourseModel[]>("courseprovider-win23jsbackend-oliverml.azurewebsutes.net/api/courses");
+        //https://localhost:7056/api/courses
+
+        course = courses?.FirstOrDefault(x => x.Id == courseId);
+    }
+
+    public class CourseModel
+    {
+        public int Id { get; set; }
+        public bool IsBestSeller { get; set; }
+        public string Image { get; set; } = null!;
+        public string Title { get; set; } = null!;
+        public string Author { get; set; } = null!;
+        public string Price { get; set; } = null!;
+        public string? DiscountPrice { get; set; }
+        public string Hours { get; set; } = null!;
+        public string LikesInProcent { get; set; } = null!;
+        public string LikesInNumbers { get; set; } = null!;
+    }
+}

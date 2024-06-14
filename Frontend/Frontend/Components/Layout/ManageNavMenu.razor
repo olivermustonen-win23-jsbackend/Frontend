@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Frontend.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject NavigationManager NavigationManager
+
+
+<AuthorizeView>
+    <Authorized>
+        <NavLink href="/account/details" class="btn btn-theme" Match="NavLinkMatch.All">
+            <i class="fa-regular fa-cog"></i><span>Account Details</span>
+        </NavLink>
+
+        <div class="nav-item px-3">
+            <form id="logoutForm" action="/Account/LogOut" method="post">
+                <AntiforgeryToken />
+                <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                <button type="submit" class="nav-link">
+                    <span class="fa-regular fa-arrow-right-from-bracket" aria-hidden="true"></span> Logout
+                </button>
+            </form>
+        </div>
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private string currentUrl;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}
